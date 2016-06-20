@@ -27,15 +27,26 @@ targetCompatibility = 1.8
 
 ext {
     queryDslVersion = '4.1.2'
-    querydslGenSources = file("$buildDir/generated-sources/querydsl")
+    queryDslGenSources = file("$buildDir/generated-sources/querydsl")
 }
 
-if (!querydslGenSources.exists())
-    querydslGenSources.mkdirs()
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+            srcDir queryDslGenSources
+        }
+    }
+}
 
-compileJava.options.compilerArgs += [
-        '-parameters', '-s', querydslGenSources
-]
+compileJava {
+    doFirst {
+        queryDslGenSources.mkdirs()
+    }
+    options.compilerArgs += [
+            '-parameters', '-s', queryDslGenSources
+    ]
+}
 
 repositories {
     mavenCentral()
