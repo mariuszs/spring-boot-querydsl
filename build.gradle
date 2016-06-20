@@ -55,10 +55,14 @@ repositories {
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('org.springframework.boot:spring-boot-starter-web')
     compile 'org.hibernate:hibernate-envers'
 
     compile 'org.springframework.data:spring-data-jpa:1.10.2.RELEASE'
     compile 'org.springframework.data:spring-data-commons:1.12.2.RELEASE'
+    runtime 'com.h2database:h2'
+
+    compile 'org.yaml:snakeyaml'
 
     compile "com.querydsl:querydsl-jpa:4.1.2"
 
