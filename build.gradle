@@ -26,25 +26,25 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 ext {
-    queryDslVersion = '4.1.2'
-    queryDslGenSources = file("$buildDir/generated-sources/querydsl")
+    queryDslVersion = '3.6.3'
+    javaGeneratedSources = file("$buildDir/generated-sources/java")
 }
 
 sourceSets {
     main {
         java {
             srcDir 'src/main/java'
-            srcDir queryDslGenSources
+            srcDir javaGeneratedSources
         }
     }
 }
 
 compileJava {
     doFirst {
-        queryDslGenSources.mkdirs()
+        javaGeneratedSources.mkdirs()
     }
     options.compilerArgs += [
-            '-parameters', '-s', queryDslGenSources
+            '-parameters', '-s', javaGeneratedSources
     ]
 }
 
@@ -52,21 +52,16 @@ repositories {
     mavenCentral()
 }
 
-
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('org.springframework.boot:spring-boot-starter-web')
     compile 'org.hibernate:hibernate-envers'
+    compile 'org.yaml:snakeyaml'
+    compile "com.mysema.querydsl:querydsl-jpa:$queryDslVersion"
 
-    compile 'org.springframework.data:spring-data-jpa:1.10.2.RELEASE'
-    compile 'org.springframework.data:spring-data-commons:1.12.2.RELEASE'
     runtime 'com.h2database:h2'
 
-    compile 'org.yaml:snakeyaml'
-
-    compile "com.querydsl:querydsl-jpa:4.1.2"
-
-    compileOnly "com.querydsl:querydsl-apt:4.1.2:jpa"
+    compileOnly "com.mysema.querydsl:querydsl-apt:$queryDslVersion:jpa"
     compileOnly 'org.projectlombok:lombok:1.16.8'
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
