@@ -10,14 +10,13 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath "gradle.plugin.com.ewerk.gradle.plugins:querydsl-plugin:1.0.6"
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'spring-boot'
-apply plugin: "com.ewerk.gradle.plugins.querydsl"
+apply plugin: 'idea'
 
 jar {
     baseName = 'spring-boot-querydsl'
@@ -28,33 +27,31 @@ targetCompatibility = 1.8
 
 ext {
     queryDslVersion = '4.1.2'
+    querydslGenSources = file("$buildDir/generated-sources/querydsl")
 }
+
+if (!querydslGenSources.exists())
+    querydslGenSources.mkdirs()
+
+compileJava.options.compilerArgs += [
+        '-parameters', '-s', querydslGenSources
+]
 
 repositories {
     mavenCentral()
 }
 
-querydsl {
-    jpa = true
-    library = "com.querydsl:querydsl-apt:${queryDslVersion}:jpa"
-    querydslSourcesDir = "${buildDir}/generated-sources/querydsl"
-}
-
-configurations {
-    querydsl.extendsFrom compileClasspath
-}
-
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile 'org.hibernate:hibernate-envers'
 
-    compile group: 'org.springframework.data', name: 'spring-data-jpa', version: '1.10.2.RELEASE'
-    compile group: 'org.springframework.data', name: 'spring-data-commons', version: '1.12.2.RELEASE'
-
+    compile 'org.springframework.data:spring-data-jpa:1.10.2.RELEASE'
+    compile 'org.springframework.data:spring-data-commons:1.12.2.RELEASE'
 
     compile "com.querydsl:querydsl-jpa:4.1.2"
-//    compileOnly "com.querydsl:querydsl-apt:4.1.2:jpa"
 
+    compileOnly "com.querydsl:querydsl-apt:4.1.2:jpa"
     compileOnly 'org.projectlombok:lombok:1.16.8'
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
