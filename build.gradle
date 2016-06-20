@@ -10,12 +10,14 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "gradle.plugin.com.ewerk.gradle.plugins:querydsl-plugin:1.0.6"
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'spring-boot'
+apply plugin: "com.ewerk.gradle.plugins.querydsl"
 
 jar {
     baseName = 'spring-boot-querydsl'
@@ -32,6 +34,17 @@ repositories {
     mavenCentral()
 }
 
+querydsl {
+    jpa = true
+    library = "com.querydsl:querydsl-apt:${queryDslVersion}:jpa"
+    querydslSourcesDir = "${buildDir}/generated-sources/querydsl"
+}
+
+configurations {
+    querydsl.extendsFrom compileClasspath
+}
+
+
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
 
@@ -39,8 +52,8 @@ dependencies {
     compile group: 'org.springframework.data', name: 'spring-data-commons', version: '1.12.2.RELEASE'
 
 
-    compile "com.querydsl:querydsl-jpa:${queryDslVersion}"
-    compileOnly "com.querydsl:querydsl-apt:${queryDslVersion}:jpa"
+    compile "com.querydsl:querydsl-jpa:4.1.2"
+//    compileOnly "com.querydsl:querydsl-apt:4.1.2:jpa"
 
     compileOnly 'org.projectlombok:lombok:1.16.8'
 
