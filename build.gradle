@@ -44,7 +44,8 @@ compileJava {
         javaGeneratedSources.mkdirs()
     }
     options.compilerArgs += [
-            '-parameters', '-s', javaGeneratedSources
+            '-parameters', '-s', javaGeneratedSources,
+            '-Aquerydsl.excludedPackages=com.example.bad'
     ]
 }
 
