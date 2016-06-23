@@ -16,7 +16,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 
 	@Override
 	public Iterable<Employee> findEmployeesByPhoneNumber(String phoneNumber) {
-		return repository.findAll(employee.phones.any().number.like(phoneNumber));
+		return repository.findAll(employee.phones.any().number.contains(phoneNumber));
 	}
 
 }

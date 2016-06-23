@@ -5,6 +5,13 @@ Employee and Phone example is taken from [Java Persistence wikibook](https://en.
 
 ![](https://upload.wikimedia.org/wikipedia/commons/7/7e/ObjectRelational-ManyToOne2.jpg)
 
+Executed query
+
+```java
+	public Iterable<Employee> findEmployeesByPhoneNumber(String phoneNumber) {
+		return repository.findAll(employee.phones.any().number.contains(phoneNumber));
+	}
+```
 
 Workarounds
 ----
