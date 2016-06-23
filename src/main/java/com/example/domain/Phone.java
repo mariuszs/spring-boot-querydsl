@@ -25,7 +25,7 @@ public class Phone {
 		this.number = number;
 	}
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	//@JoinColumn(name="OWNER_ID")
 	private Employee owner;
 }
