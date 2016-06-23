@@ -1,6 +1,5 @@
 package com.example;
 
-import jdk.nashorn.internal.runtime.QuotedStringTokenizer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
