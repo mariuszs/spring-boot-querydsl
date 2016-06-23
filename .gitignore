@@ -2,3 +2,8 @@
 .gradle
 build
 classes
+# Eclipse IDE stuff
+bin/
+.settings/
+.classpath
+.project
