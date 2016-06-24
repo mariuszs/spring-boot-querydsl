@@ -20,6 +20,7 @@ Workarounds
 
 ## Links
 
+- [Spring projects links to docs and examples summary](https://github.com/paulvi/spring-projects-links-to-docs-and-examples-summary)
 - [Hibernate ORM Envers](http://hibernate.org/orm/envers/), [docs](http://docs.jboss.org/envers/docs/index.html)
 - https://en.wikibooks.org/wiki/Java_Persistence
 
