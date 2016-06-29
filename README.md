@@ -13,6 +13,12 @@ Executed query
 	}
 ```
 
+IntelliJ Idea configuration:
+
+* Go to Preferences -> Build, Execution, Deployment -> Annotation Processors;
+* Check Enable annotation processing checkbox;
+* In "Store generated sources relative to:" select Module content root.
+
 Workarounds
 ----
 
@@ -24,3 +30,4 @@ Workarounds
 - [Hibernate ORM Envers](http://hibernate.org/orm/envers/), [docs](http://docs.jboss.org/envers/docs/index.html)
 - https://en.wikibooks.org/wiki/Java_Persistence
 
+- http://bsideup.blogspot.com/2015/04/querydsl-with-gradle-and-idea.html
